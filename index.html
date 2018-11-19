@@ -1,0 +1,65 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Pagination With Vuejs</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="dist/css/pagination-style.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <header>
+   
+
+    <main role="main" id="pagination-app">
+
+    
+      <h1 class="text-center">Presented By Tony Ng</h1>
+      
+      <div class="album py-5 bg-light">
+        <div class="container" style="height: 100vh">
+          <transition-group name="slide-fade" tag="div" class="row">
+          
+            <div class="card mb-4 col-sm-12 col-md-4 box-shadow post-cards" v-for="post in posts" :key="post" >
+              <img class="card-img-top" :src="post.avatar" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">{{post.first_name}}</h5>
+                <p class="card-text">{{post.last_name}}</p>
+              </div>
+              
+            </div>
+          </transition-group>
+          
+          <div class="row">
+            <div class="center-align clearfix  col-md-2 offset-md-5">
+                <button type="button" class="btn btn-sm btn-outline-secondary" v-if="page > total_pages" @click="page--;getPosts()"> << </button>
+                <button type="button" class="btn btn-sm btn-outline-secondary" v-if="page <= total_pages" v-for="pageNumber in pages.slice(0, 10)" @click="page = pageNumber;getPosts()"> {{pageNumber}} </button>
+                <button type="button" class="btn btn-sm btn-outline-secondary" v-if="page > total_pages"  v-for="pageNumber in pages.slice(page-10, page + 1)" @click="page = pageNumber;getPosts()"> {{pageNumber}} </button>
+  
+                <button type="button" @click="page++; getPosts()"  class="btn btn-sm btn-outline-secondary"> >> </button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+    </main>
+
+    
+
+    <script src="dist/js/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="pagination.js"></script>
+  </body>
+</html>
